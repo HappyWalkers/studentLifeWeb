@@ -136,14 +136,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-
 # STATIC_ROOT used to collected static files from the Django project. Usually, files in this directory will be served by web server, like apache, to the url claimed by STATIC_URL
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
