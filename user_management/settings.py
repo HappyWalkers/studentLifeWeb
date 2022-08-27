@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UserConfig',
     'social_django',
-    'mod_wsgi.server',
+    # 'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
