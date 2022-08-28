@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class college(models.Model):
     """model representing different colleges and universities"""
     id = models.AutoField(primary_key=True) # a good alternative is UUIDField
-    name = models.CharField(max_length=20, help_text="enter the name of the college")
+    name = models.CharField(max_length=200, help_text="enter the name of the college")
     introduction = models.TextField(max_length=1000, help_text="enter a brief introduction of the college")
     
     def __str__(self):
@@ -99,12 +99,12 @@ class professor(models.Model):
 class extendUser(models.Model):
     """model extend the profile from login app"""
     basicUser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    college = models.OneToOneField(college, on_delete=models.CASCADE)
-    major = models.OneToOneField(major, on_delete=models.CASCADE)
+    college = models.OneToOneField(college, on_delete=models.CASCADE, blank=True)
+    major = models.OneToOneField(major, on_delete=models.CASCADE, blank=True)
     courses = models.ManyToManyField(course, blank=True, help_text="courses taken by the user")
     
     def __str__(self):
-        return self.basicUser.user.first_name.title
+        return self.basicUser.user.username
 
 class review(models.Model):
     """model representing the review posted by a extendUser to a course"""
