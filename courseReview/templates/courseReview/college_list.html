@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>College List</h1>
+  {% if college_list %}
+  <ul>
+    {% for college in college_list %}
+      <li>
+        <a href="{{ college.get_absolute_url }}">{{ college.name }}</a> ({{college.introduction}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no college in the database.</p>
+  {% endif %}
+{% endblock %}
