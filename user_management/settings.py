@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UserConfig',
+    'users.apps.UserConfig', # login app
     'social_django',
-    # 'mod_wsgi.server',
+    # 'mod_wsgi.server', # used in server, apache used mod_wsgi to communicate with Django
+    'courseReview.apps.CoursereviewConfig', # course review app
 ]
 
 MIDDLEWARE = [
@@ -138,10 +139,10 @@ USE_TZ = True
 
 # STATIC_ROOT used to collected static files from the Django project. Usually, files in this directory will be served by web server, like apache, to the url claimed by STATIC_URL
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
