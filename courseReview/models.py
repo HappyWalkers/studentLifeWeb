@@ -6,12 +6,19 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 class college(models.Model):
     """model representing different colleges and universities"""
-    id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True) # a good alternative is UUIDField
     name = models.CharField(max_length=20, help_text="enter the name of the college")
     introduction = models.TextField(max_length=1000, help_text="enter a brief introduction of the college")
     
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular college"""
+        return reverse('college-detail', args=[str(self.id)]) # the name, college-detail, defined in urls.py
 
 
 class department(models.Model):
@@ -24,6 +31,13 @@ class department(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular department"""
+        return reverse('department-detail', args=[str(self.id)])
+
 class major(models.Model):
     """model representing different majors"""
     id = models.AutoField(primary_key=True)
@@ -34,6 +48,13 @@ class major(models.Model):
     
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular major"""
+        return reverse('major-detail', args=[str(self.id)])
 
 class course(models.Model):
     """model representing different courses"""
@@ -48,6 +69,13 @@ class course(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular course"""
+        return reverse('course-detail', args=[str(self.id)])
+
 class professor(models.Model):
     """model representing different professors"""
     id = models.AutoField(primary_key=True)
@@ -60,6 +88,13 @@ class professor(models.Model):
     
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular professor"""
+        return reverse('professor-detail', args=[str(self.id)])
 
 class extendUser(models.Model):
     """model extend the profile from login app"""
@@ -77,12 +112,19 @@ class review(models.Model):
     user = models.ForeignKey(to=extendUser, blank=False, on_delete=models.SET_NULL, null=True)
     course = models.ForeignKey(to=course, blank=False, on_delete=models.CASCADE)
     content = models.TextField(blank=True, max_length=1000, help_text="enter a review for the course")
-    time = models.TimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(blank=False, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="rate this course")
     score = models.IntegerField(blank=True, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="enter your score of the course")
     qualityRating = models.IntegerField(blank=False, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="rate the qulaity of the course")
     
     def __str__(self):
         return self.content
+
+    class Meta:
+        ordering = ['time']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular review"""
+        return reverse('review-detail', args=[str(self.id)])
 
     
