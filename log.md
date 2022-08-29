@@ -128,3 +128,9 @@ certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容�
 
 [Filtering](https://www.django-rest-framework.org/api-guide/filtering/#filtering)
 
+### access more context data in template(html)
+[No need to use get_context_data, use {{ view.some_method }}](https://reinout.vanrees.org/weblog/2014/05/19/context.html#:~:text=Behind%20the%20scenes%2C%20it%20is%20the%20ContextMixin%20that,doesn%E2%80%99t%20allow%20you%20to%20call%20methods%20like%20that.)
+
+### manyToManyField Obejcts
+[How to Retrieve All Objects of a ManyToManyField in Django](http://www.learningaboutelectronics.com/Articles/How-to-retrieve-all-objects-of-a-ManyToManyField-in-Django.php#:~:text=A%20ManyToManyField%20in%20Django%20is%20a%20field%20that,ManyToManyField%2C%20we%20can%20use%20the%20add%20%28%29%20function.)
+
