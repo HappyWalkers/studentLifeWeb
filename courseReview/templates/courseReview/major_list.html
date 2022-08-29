@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Major List</h1>
+  <h1>{{view.getDepartment.name}}</h1>
+  <p><strong>College: </strong>{{view.getDepartment.college.name}}</p>
+  <p><strong>introduction: </strong>{{view.getDepartment.introduction}}</p>
+  <h2>Major List</h2>
   {% if major_list %}
   <ul>
     {% for major in major_list %}

@@ -1,7 +1,9 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Department List</h1>
+  <h1>{{view.getCollege.name}}</h1>
+  <p><strong>Introduction: </strong>{{view.getCollege.introduction}}</p>
+  <h2>Department List</h2>
   {% if department_list %}
   <ul>
     {% for department in department_list %}

@@ -39,6 +39,9 @@ class collegeDetailView(generic.ListView):
     def get_queryset(self):
         return department.objects.filter(college__id=self.collegeID)
 
+    def getCollege(self):
+        return college.objects.filter(id=self.collegeID)[0]
+
 class departmentDetailView(generic.ListView):
     """departmentDetailView represents major list view"""
     model = major
@@ -52,9 +55,13 @@ class departmentDetailView(generic.ListView):
     def get_queryset(self):
         return major.objects.filter(college__id=self.collegeID, department__id=self.departmentID)
 
-class majorDetailView(generic.DetailView):
-    """majorDetailView represents major detail view"""
-    model = major
+    def getDepartment(self):
+        return department.objects.filter(id=self.departmentID)[0]
+
+class majorDetailView(generic.ListView):
+    """majorDetailView represents course list view"""
+    model = course
+    paginate_by = 10
 
     def dispatch(self, request, *args, **kwargs):
         self.collegeID = kwargs.get('collegeID')
@@ -62,9 +69,32 @@ class majorDetailView(generic.DetailView):
         self.majorID = kwargs.get('majorID')
         return super(majorDetailView, self).dispatch(request, *args, **kwargs)
 
-    # generic.ListView get all the objects of the target model,
-    # while DetailView get only one object of the target model,
-    # so DetailView needs to know which data to extract.
-    # that's why we need to tell the DetailView the primaryKey of the data extracted
+    def get_queryset(self):
+        return course.objects.filter(college__id=self.collegeID, department__id=self.departmentID, major__id=self.majorID)
+
+    def getMajor(self):
+        return major.objects.filter(id=self.majorID)[0]
+
+class courseDetailView(generic.DetailView):
+    """courseDetailView represents course detail view"""
+    model = course
+
+    def dispatch(self, request, *args, **kwargs):
+        self.collegeID = kwargs.get('collegeID')
+        self.departmentID = kwargs.get('departmentID')
+        self.majorID = kwargs.get('majorID')
+        self.courseID = kwargs.get('courseID')
+        return super(courseDetailView, self).dispatch(request, *args, **kwargs)
+
     def get_object(self, queryset=None):
-        return major.objects.get(id=self.majorID)
+        """
+        generic.ListView get all the objects of the target model,
+        while DetailView get only one object of the target model,
+        so DetailView needs to know which data to extract.
+        that's why we need to tell the DetailView the primaryKey of the data extracted 
+        """
+        return course.objects.get(id=self.courseID)
+
+    def getProfessors(self):
+        """get all the professors of this particular course"""
+        return course.objects.get(id=self.courseID).professor.all()

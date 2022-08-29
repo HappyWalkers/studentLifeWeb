@@ -57,26 +57,6 @@ class major(models.Model):
         """returns the URL to access a particular major"""
         return reverse('major-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.id})
 
-class course(models.Model):
-    """model representing different courses"""
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200, help_text="enter the name of the course")
-    introduction = models.TextField(max_length=1000, help_text="enter a brief introduction of the course")
-    college = models.ForeignKey(college, on_delete=models.CASCADE)
-    department = models.ForeignKey(department, on_delete=models.CASCADE)
-    professor = models.ManyToManyField("professor", help_text="select a professor for the course")
-    rating = models.IntegerField(blank=True, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="average score of the course rating")
-    
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-
-    def get_absolute_url(self):
-        """returns the URL to access a particular course"""
-        return reverse('course-detail', args=[str(self.id)])
-
 class professor(models.Model):
     """model representing different professors"""
     id = models.AutoField(primary_key=True)
@@ -84,7 +64,6 @@ class professor(models.Model):
     introduction = models.TextField(max_length=1000, help_text="enter a brief introduction of the professor")
     college = models.ForeignKey(college, on_delete=models.CASCADE)
     department = models.ForeignKey(department, on_delete=models.CASCADE)
-    # courses = models.ManyToManyField(course, help_text="courses taught by the professor") # professor's courses could be accessed by course.professor
     rating = models.IntegerField(blank=True, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="average score of the courses ratings which taught by the professor")
     
     def __str__(self):
@@ -96,6 +75,27 @@ class professor(models.Model):
     def get_absolute_url(self):
         """returns the URL to access a particular professor"""
         return reverse('professor-detail', args=[str(self.id)])
+
+class course(models.Model):
+    """model representing different courses"""
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200, help_text="enter the name of the course")
+    introduction = models.TextField(max_length=1000, help_text="enter a brief introduction of the course")
+    college = models.ForeignKey(college, on_delete=models.CASCADE)
+    department = models.ForeignKey(department, on_delete=models.CASCADE)
+    major = models.ForeignKey(major, on_delete=models.CASCADE)
+    professor = models.ManyToManyField(professor, help_text="select a professor for the course")
+    rating = models.IntegerField(blank=True, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="average score of the course rating")
+    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+
+    def get_absolute_url(self):
+        """returns the URL to access a particular course"""
+        return reverse('course-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.major.id, 'courseID':self.id})
 
 class extendUser(models.Model):
     """model extend the profile from login app"""
