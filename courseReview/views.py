@@ -20,10 +20,12 @@ def index(request):
 class collegeView(generic.ListView):
     """collegeView represents college list view"""
     model = college
+    paginate_by = 10
 
 class collegeDetailView(generic.ListView):
     """collegeDetailView represents department list view"""
     model = department
+    paginate_by = 10
 
     def dispatch(self, request, *args, **kwargs):
         self.collegeID = kwargs.get('collegeID')
@@ -35,6 +37,7 @@ class collegeDetailView(generic.ListView):
 class departmentDetailView(generic.ListView):
     """departmentDetailView represents major list view"""
     model = major
+    paginate_by = 10
 
     def dispatch(self, request, *args, **kwargs):
         self.collegeID = kwargs.get('collegeID')
