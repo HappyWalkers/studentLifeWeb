@@ -10,9 +10,14 @@ def index(request):
     num_users = extendUser.objects.all().count()
     num_colleges = college.objects.all().count()
 
+    # Number of visits to this view, as counted in the session variable.
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+
     context = {
         'num_users' : num_users,
         'num_colleges' : num_colleges,
+        'num_visits': num_visits,
     }
 
     return render(request, 'index.html', context=context)
