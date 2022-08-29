@@ -18,19 +18,45 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 class collegeView(generic.ListView):
+    """collegeView represents college list view"""
     model = college
 
-# class collegeDetailView(generic.DetailView):
-#     model = college
-
-class departmentView(generic.ListView):
+class collegeDetailView(generic.ListView):
+    """collegeDetailView represents department list view"""
     model = department
 
-# class departmentDetailView(generic.DetailView):
-#     model = department
+    def dispatch(self, request, *args, **kwargs):
+        self.collegeID = kwargs.get('collegeID')
+        return super(collegeDetailView, self).dispatch(request, *args, **kwargs)
 
-class majorView(generic.ListView):
+    def get_queryset(self):
+        return department.objects.filter(college__id=self.collegeID)
+
+class departmentDetailView(generic.ListView):
+    """departmentDetailView represents major list view"""
     model = major
+
+    def dispatch(self, request, *args, **kwargs):
+        self.collegeID = kwargs.get('collegeID')
+        self.departmentID = kwargs.get('departmentID')
+        return super(departmentDetailView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return major.objects.filter(college__id=self.collegeID, department__id=self.departmentID)
 
 class majorDetailView(generic.DetailView):
+    """majorDetailView represents major detail view"""
     model = major
+
+    def dispatch(self, request, *args, **kwargs):
+        self.collegeID = kwargs.get('collegeID')
+        self.departmentID = kwargs.get('departmentID')
+        self.majorID = kwargs.get('majorID')
+        return super(majorDetailView, self).dispatch(request, *args, **kwargs)
+
+    # generic.ListView get all the objects of the target model,
+    # while DetailView get only one object of the target model,
+    # so DetailView needs to know which data to extract.
+    # that's why we need to tell the DetailView the primaryKey of the data extracted
+    def get_object(self, queryset=None):
+        return major.objects.get(id=self.majorID)

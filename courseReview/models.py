@@ -37,7 +37,7 @@ class department(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular department"""
-        return reverse('department-detail', args=[str(self.id)])
+        return reverse('department-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.id})
 
 class major(models.Model):
     """model representing different majors"""
@@ -55,7 +55,7 @@ class major(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular major"""
-        return reverse('major-detail', args=[str(self.id)])
+        return reverse('major-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.id})
 
 class course(models.Model):
     """model representing different courses"""

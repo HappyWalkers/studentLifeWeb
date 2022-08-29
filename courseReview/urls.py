@@ -9,15 +9,10 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
 
-    path('colleges', views.collegeView.as_view(), name='colleges'),
-    # path('college/<int:pk>', views.collegeDetailView.as_view(), name='college-detail'), 
-    path('college/<int:pk>', views.departmentView.as_view(), name='college-detail'), 
+    path('college', views.collegeView.as_view(), name='colleges'),
+    path('college/<int:collegeID>', views.collegeDetailView.as_view(), name='college-detail'), 
 
-    # path('college/departments', views.departmentView.as_view(), name='departments'),
-    # path('college/department/<int:pk>', views.departmentDetailView.as_view(), name='department-detail'),
-    path('college/department/<int:pk>', views.majorView.as_view(), name='department-detail'),
+    path('college/<int:collegeID>/department/<int:departmentID>', views.departmentDetailView.as_view(), name='department-detail'),
 
-    # path('college/majors', views.majorView.as_view(), name='majors'),
-    # path('college/major/<int:pk>', views.majorDetailView.as_view(), name='major-detail'),
-    path('college/major/<int:pk>', views.majorDetailView.as_view(), name='major-detail'),
+    path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>', views.majorDetailView.as_view(), name='major-detail'),
 ]
