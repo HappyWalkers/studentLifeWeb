@@ -98,3 +98,7 @@ class courseDetailView(generic.DetailView):
     def getProfessors(self):
         """get all the professors of this particular course"""
         return course.objects.get(id=self.courseID).professor.all()
+
+    def getReviews(self):
+        """get all the reviews of this particular course"""
+        return review.objects.filter(course__id=self.courseID)

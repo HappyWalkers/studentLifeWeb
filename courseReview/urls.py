@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     path('college', views.collegeView.as_view(), name='colleges'),
+
     path('college/<int:collegeID>', views.collegeDetailView.as_view(), name='college-detail'), 
 
     path('college/<int:collegeID>/department/<int:departmentID>', views.departmentDetailView.as_view(), name='department-detail'),
@@ -18,4 +19,5 @@ urlpatterns = [
 
     path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>', views.courseDetailView.as_view(), name='course-detail'),
 
+    
 ]

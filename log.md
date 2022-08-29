@@ -134,3 +134,5 @@ certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容�
 ### manyToManyField Obejcts
 [How to Retrieve All Objects of a ManyToManyField in Django](http://www.learningaboutelectronics.com/Articles/How-to-retrieve-all-objects-of-a-ManyToManyField-in-Django.php#:~:text=A%20ManyToManyField%20in%20Django%20is%20a%20field%20that,ManyToManyField%2C%20we%20can%20use%20the%20add%20%28%29%20function.)
 
+### HTML Table
+[<table>: The Table element](https://developer.mozilla.org/en-US/docs/web/html/element/table#deprecated_attributes)
