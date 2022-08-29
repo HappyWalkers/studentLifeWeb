@@ -1,84 +1,84 @@
-# 搭建网站的记录
+# Log of building the studentLife website
 
 [TOC]
 
-## 熟悉服务器AWS
+## Get to know AWS Server
 
 [新手教程－如何在 Amazon AWS 上搭建和部署网站](http://www.awshao.com/新手教程－如何在-amazon-aws-上搭建和部署网站/)
 
-[教程：在 Amazon Linux 2 上安装 LAMP Web 服务器](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html)
+[Tutorial: Install a LAMP web server on Amazon Linux 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-lamp-amazon-linux-2.html)
 
-[教程：在 Amazon Linux 2 上配置 SSL/TLS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html)
+[Tutorial: Configure SSL/TLS on Amazon Linux 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/SSL-on-amazon-linux-2.html)
 
-[教程：在 Amazon Linux 2 上托管 WordPress 博客](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hosting-wordpress.html#create_user_and_database)
+[Tutorial: Host a WordPress blog on Amazon Linux 2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hosting-wordpress.html#create_user_and_database)
 
-## 熟悉Web开发
+## Get to know web development
 
-[让我们开始 CSS 的学习之旅](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps/Getting_started#在此模块)
-[什么是 JavaScript？](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
-[创建我的第一个表单](https://developer.mozilla.org/zh-CN/docs/Learn/Forms)
-[React 入门](https://developer.mozilla.org/zh-CN/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started)
-[Ember 入门](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Ember_getting_started)
-[开始使用 Vue](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Vue_getting_started#.vue_files_single_file_components)
-[开始使用 Svelte](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_getting_started)
-[开始使用 Angular](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Angular_getting_started)
-[服务器端介绍](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction)
-[Django介绍](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Introduction)
-[Express/Node 入门](https://developer.mozilla.org/zh-CN/docs/Learn/Server-side/Express_Nodejs/Introduction)
+[Getting started with CSS](https://developer.mozilla.org/en-US/docs/Learn/CSS/First_steps/Getting_started)
+[What is JavaScript?](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
+[Web forms — Working with user data](https://developer.mozilla.org/en-US/docs/Learn/Forms)
+[Getting started with React](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_getting_started)
+[Getting started with Ember](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Ember_getting_started)
+[Getting started with Vue](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Vue_getting_started#.vue_files_single_file_components)
+[Getting started with Svelte](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_getting_started)
+[Getting started with Angular](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Angular_getting_started)
+[Introduction to the server side](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Introduction)
+[Django introduction](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Introduction)
+[Express/Node introduction](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/Introduction)
 [Node.js是用来做什么的？](https://www.zhihu.com/question/33578075)
-[Node.js 简介](http://nodejs.cn/learn)
+[Introduction to Node .js](http://nodejs.cn/learn)
 
-## 学习使用Django在本地搭建网站
+## Learn to build local web using Django
 
-[Django 教程：本地图书馆网站](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
+[Django Tutorial: The Local Library website](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
 
-## 将登录界面网站部署到AWS上
+## Put login web on the AWS server
 
-### 删除实例重新创建
+### Delete and recreate the instance of server
 
 之前使用的aws linux 2很难用，换成ubuntu，采用20（18的仍有python2），22刚发布暂不用
 
-### 设置静态IP
+### Set static IP
 
 13.215.90.183
 
-### 租用域名 
+### Rent Domain
 
 studentlife.club
 
-### git项目
+### Git clone a login repo
 
 [Django-registration-and-login-system](https://github.com/earthcomfy/Django-registration-and-login-system)
 
-### 安装apache
+### Install apache
 
 [Install and Configure Apache](https://ubuntu.com/tutorials/install-and-configure-apache#1-overview)
 
-### 使用python虚拟环境
+### Use python virtual env
 
-[使用 pip 和虚拟环境安装包](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
-[如何在 virtualenv 中安装包？](https://stackoverflow.com/questions/21240653/how-to-install-a-package-inside-virtualenv)
-[由于 EnvironmentError 无法安装软件包: Errno 13\](https://stackoverflow.com/questions/52949531/could-not-install-packages-due-to-an-environmenterror-errno-13)
+[Installing packages using pip and virtual environments](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/)
+[How to install a package inside virtualenv?](https://stackoverflow.com/questions/21240653/how-to-install-a-package-inside-virtualenv)
+[Could not install packages due to an EnvironmentError: [Errno 13]](https://stackoverflow.com/questions/52949531/could-not-install-packages-due-to-an-environmenterror-errno-13)
 
-### 安装mod-wsgi
+### Install mod-wsgi
 
 可以用[pip安装](https://pypi.org/project/mod-wsgi/)或从[源码安装](https://modwsgi.readthedocs.io/en/master/user-guides/quick-installation-guide.html)，这里选择用[pip安装](https://pypi.org/project/mod-wsgi/)，并进行将mod-wsgi的位置写入apache2配置文件的配置
 
 另可参考：[Django 上的静态 STATIC_URL 和 STATIC_ROOT 之间的区别](https://stackoverflow.com/questions/8687927/difference-between-static-static-url-and-static-root-on-django)
 
-### 配置Apache管理Django
+### Configure Apache to manage Django
 
-[如何使用 Apache 和 mod_wsgi 托管 Django](https://docs.djangoproject.com/zh-hans/4.1/howto/deployment/wsgi/modwsgi/)
+[How to use Django with Apache and mod_wsgi](https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/modwsgi/)
 
-### 配置SSL
+### Configure SSL
 
-[certbot 指令](https://certbot.eff.org/instructions?ws=apache&os=ubuntufocal)
+[certbot instructions](https://certbot.eff.org/instructions?ws=apache&os=ubuntufocal)
 
 [Name duplicates previous WSGI daemon definition](https://stackoverflow.com/questions/39317200/name-duplicates-previous-wsgi-daemon-definition)
 
 certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容，并创建了studentLifeWeb-le-ssl.conf文件，同时使apache2使能该文件，因此去掉之前加了注释的WSGI*的语句就可以消除转发mod-wsgi失败的问题（表现为访问网站回到了默认页面）
 
-## 网站设计思路
+## StudentLife web design
 
 1. 首先，这是一个课程评论网站，主要用户是高校学生
 2. 给用户添加属性
@@ -102,13 +102,13 @@ certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容�
 7. 加入添加好友功能，使不认识的人可以相互认识讨论
 8. 加入学习资源功能，在课程页面上加入高质量的学习资源，书、课程推荐等
 
-## 网站代码编写
+## Coding
 
-### 教程
+### Instructions
 
 跟随教程，按步骤编写：[Django介绍](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Introduction)
 
-### 将参数从URL传递到View
+### Pass parameters from URL to View
 
 [How To Pass Parameters To View Via Url In Django](https://www.dev2qa.com/how-to-pass-parameters-to-view-via-url-in-django/)
 
@@ -116,13 +116,13 @@ certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容�
 
 ### Generic View
 
-[通用显示视图](https://docs.djangoproject.com/zh-hans/4.1/ref/class-based-views/generic-display/)
+[Generic display views¶](https://docs.djangoproject.com/en/4.1/ref/class-based-views/generic-display/)
 
 [Django: detail view must be called with pk or slug](https://www.valentinog.com/blog/detail/)
 
 ### Django reverse
 
-[django.urls 实用函数](https://docs.djangoproject.com/zh-hans/4.1/ref/urlresolvers/)
+[django.urls utility functions](https://docs.djangoproject.com/en/4.1/ref/urlresolvers/)
 
 ### Filter in get_queryset()
 
