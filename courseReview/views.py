@@ -20,17 +20,17 @@ def index(request):
 class collegeView(generic.ListView):
     model = college
 
-class collegeDetailView(generic.DetailView):
-    model = college
+# class collegeDetailView(generic.DetailView):
+#     model = college
 
-# class departmentView(generic.ListView):
-#     model = department
+class departmentView(generic.ListView):
+    model = department
 
 # class departmentDetailView(generic.DetailView):
 #     model = department
 
-# class majorView(generic.ListView):
-#     model = major
+class majorView(generic.ListView):
+    model = major
 
-# class majorDetailView(generic.DetailView):
-#     model = major
+class majorDetailView(generic.DetailView):
+    model = major

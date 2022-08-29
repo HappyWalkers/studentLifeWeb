@@ -14,12 +14,3 @@
     <p>There are no major in the database.</p>
   {% endif %}
 {% endblock %}
-
-{% block sidebar %}
-<ul class="sidebar-nav">
-  <li><a href="{% url 'index' %}">Home</a></li>
-  <li><a href="{% url 'colleges' %}">All Colleges</a></li>
-  <li><a href="{% url 'departments' %}">All departments</a></li>
-  <li><a href="{% url 'majors' %}">All Majors</a></li>
-</ul>
-{% endblock %}
