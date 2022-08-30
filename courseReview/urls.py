@@ -19,7 +19,11 @@ urlpatterns = [
 
     path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>', views.courseDetailView.as_view(), name='course-detail'),
 
-    path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review', views.reviewCourse, name='review-course'),
+    # path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review', views.reviewCourse, name='review-course'),
 
-    
+    path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review/create', views.reviewCreate, name='review-create'),
+    path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review/<int:reviewID>/update', views.reviewUpdate, name='review-update'),
+    path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review/<int:pk>/delete', views.reviewDelete.as_view(), name='review-delete'),
+
+
 ]

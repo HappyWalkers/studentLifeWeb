@@ -12,6 +12,9 @@ from django.urls import reverse
 
 from courseReview.forms import reviewCourseForm
 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 # Create your views here.
 def index(request):
     """view function for index page of course review"""
@@ -111,7 +114,7 @@ class courseDetailView(generic.DetailView):
         """get all the reviews of this particular course"""
         return review.objects.filter(course__id=self.courseID)
 
-def reviewCourse(request, collegeID, departmentID, majorID, courseID):
+def reviewCreate(request, collegeID, departmentID, majorID, courseID):
     if request.user.is_authenticated:
         reviewerBasicUserUser = User.objects.get(username=request.user.get_username())
         reviewerBasicUser = Profile.objects.get(user=reviewerBasicUserUser)
@@ -151,3 +154,73 @@ def reviewCourse(request, collegeID, departmentID, majorID, courseID):
     }
 
     return render(request, 'courseReview/reviewCourse_form.html', context)
+
+def reviewUpdate(request, collegeID, departmentID, majorID, courseID, reviewID):
+    # get user who post the review
+    if request.user.is_authenticated:
+        reviewerBasicUserUser = User.objects.get(username=request.user.get_username())
+        reviewerBasicUser = Profile.objects.get(user=reviewerBasicUserUser)
+        reviewer = extendUser.objects.get(basicUser=reviewerBasicUser)
+    else:
+        reviewer = None
+    # get course to be reviewed
+    reviewingCourse = course.objects.get(id=courseID)
+    # get the review to be updated
+    reviewToBeUpdated = review.objects.get(id=reviewID)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = reviewCourseForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # update the fields in review to be updated
+            reviewToBeUpdated.content = form.cleaned_data['content']
+            reviewToBeUpdated.time = datetime.datetime.now()
+            reviewToBeUpdated.rating = form.cleaned_data['rating']
+            reviewToBeUpdated.score = form.cleaned_data['score']
+            reviewToBeUpdated.qualityRating = form.cleaned_data['qualityRating']
+
+            reviewToBeUpdated.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(
+                reverse('course-detail', 
+                kwargs={
+                    'collegeID':collegeID, 
+                    'departmentID':departmentID, 
+                    'majorID':majorID, 
+                    'courseID':courseID}
+                    )
+                    )
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = reviewCourseForm(
+            data={
+                'rating':reviewToBeUpdated.rating,
+                'qualityRating':reviewToBeUpdated.qualityRating,
+                'score': reviewToBeUpdated.score,
+                'content': reviewToBeUpdated.content}
+                )
+
+    context = {
+        'form': form,
+        'user': reviewer,
+        'course': reviewingCourse,
+    }
+
+    return render(request, 'courseReview/reviewCourse_form.html', context)
+
+class reviewDelete(DeleteView):
+    model = review
+
+    def get_success_url(self) -> str:
+        return reverse_lazy('course-detail', kwargs={
+            'collegeID':self.object.user.college.id,
+            'departmentID':self.object.user.major.department.id,
+            'majorID':self.object.user.major.id,
+            'courseID':self.object.course.id,
+        })

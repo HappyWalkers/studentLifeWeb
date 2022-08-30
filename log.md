@@ -136,3 +136,16 @@ certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容�
 
 ### HTML Table
 [<table>: The Table element](https://developer.mozilla.org/en-US/docs/web/html/element/table#deprecated_attributes)
+
+### Save class in model
+[Model instance reference](https://django.readthedocs.io/en/stable/ref/models/instances.html)
+
+### DateTimeField
+[DateTimeField – Django Models](https://www.geeksforgeeks.org/datetimefield-django-models/)
+
+### get user from request
+[How can I get the username of the logged-in user in Django?](https://stackoverflow.com/questions/16906515/how-can-i-get-the-username-of-the-logged-in-user-in-django)
+
+
+
+
