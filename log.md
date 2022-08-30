@@ -143,9 +143,19 @@ certbot复制了原本/etc/apache2/sites-available/studentLifeWeb.conf的内容�
 ### DateTimeField
 [DateTimeField – Django Models](https://www.geeksforgeeks.org/datetimefield-django-models/)
 
-### get user from request
+### Get user from request
 [How can I get the username of the logged-in user in Django?](https://stackoverflow.com/questions/16906515/how-can-i-get-the-username-of-the-logged-in-user-in-django)
 
+### Binding form
+[The Forms API](https://docs.djangoproject.com/en/4.1/ref/forms/api/)
 
+### update instance of class in model
+[Saving objects](https://docs.djangoproject.com/en/4.1/ref/models/instances/)
+
+### pass url paras to reverse_lazy
+[How to pass url parameter to reverse_lazy in Django urls.py](https://stackoverflow.com/questions/9879259/how-to-pass-url-parameter-to-reverse-lazy-in-django-urls-py)
+
+### pass url paras to success_url in deleteView
+[django DeleteView - how to pass a parameter to use for success_url?](https://stackoverflow.com/questions/68882385/django-deleteview-how-to-pass-a-parameter-to-use-for-success-url)
 
 
