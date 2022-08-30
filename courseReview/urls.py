@@ -19,5 +19,7 @@ urlpatterns = [
 
     path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>', views.courseDetailView.as_view(), name='course-detail'),
 
+    path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review', views.reviewCourse, name='review-course'),
+
     
 ]

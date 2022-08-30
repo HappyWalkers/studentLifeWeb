@@ -113,7 +113,7 @@ class review(models.Model):
     user = models.ForeignKey(to=extendUser, blank=False, on_delete=models.SET_NULL, null=True)
     course = models.ForeignKey(to=course, blank=False, on_delete=models.CASCADE)
     content = models.TextField(blank=True, max_length=1000, help_text="enter a review for the course")
-    time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now_add=True, help_text="time the review edited")
     rating = models.IntegerField(blank=False, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="rate this course")
     score = models.IntegerField(blank=True, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="enter your score of the course")
     qualityRating = models.IntegerField(blank=False, validators=[MaxValueValidator(100), MinValueValidator(0)], help_text="rate the qulaity of the course")
@@ -127,5 +127,9 @@ class review(models.Model):
     def get_absolute_url(self):
         """returns the URL to access a particular review"""
         return reverse('review-detail', args=[str(self.id)])
+
+    @classmethod
+    def create(cls, user, course, content, time, rating, score, qualityRating):
+        return cls(user=user, course=course, content=content, time=time, rating=rating, score=score, qualityRating=qualityRating)
 
     

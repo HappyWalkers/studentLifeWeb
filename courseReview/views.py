@@ -1,8 +1,16 @@
-from django.shortcuts import render
-
 from .models import college, department, major, course, professor, extendUser, review
+from users.models import Profile
+from django.contrib.auth.models import User
 
 from django.views import generic
+
+import datetime
+
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from courseReview.forms import reviewCourseForm
 
 # Create your views here.
 def index(request):
@@ -102,3 +110,44 @@ class courseDetailView(generic.DetailView):
     def getReviews(self):
         """get all the reviews of this particular course"""
         return review.objects.filter(course__id=self.courseID)
+
+def reviewCourse(request, collegeID, departmentID, majorID, courseID):
+    if request.user.is_authenticated:
+        reviewerBasicUserUser = User.objects.get(username=request.user.get_username())
+        reviewerBasicUser = Profile.objects.get(user=reviewerBasicUserUser)
+        reviewer = extendUser.objects.get(basicUser=reviewerBasicUser)
+    else:
+        reviewer = None
+    reviewingCourse = course.objects.get(id=courseID)
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = reviewCourseForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            content = form.cleaned_data['content']
+            time = datetime.datetime.now()
+            rating = form.cleaned_data['rating']
+            score = form.cleaned_data['score']
+            qualityRating = form.cleaned_data['qualityRating']
+
+            comment = review.create(user=reviewer, course=reviewingCourse, content=content, time=time, rating=rating, score=score, qualityRating=qualityRating)
+            comment.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('course-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID, 'majorID':majorID, 'courseID':courseID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = reviewCourseForm()
+
+    context = {
+        'form': form,
+        'user': reviewer,
+        'course': reviewingCourse,
+    }
+
+    return render(request, 'courseReview/reviewCourse_form.html', context)
