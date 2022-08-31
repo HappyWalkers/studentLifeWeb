@@ -219,9 +219,9 @@ class reviewDelete(DeleteView):
 
     def get_success_url(self) -> str:
         return reverse_lazy('courseReview:course-detail', kwargs={
-            'collegeID':self.object.user.college.id,
-            'departmentID':self.object.user.major.department.id,
-            'majorID':self.object.user.major.id,
+            'collegeID':self.object.course.college.id,
+            'departmentID':self.object.course.major.department.id,
+            'majorID':self.object.course.major.id,
             'courseID':self.object.course.id,
         })
 

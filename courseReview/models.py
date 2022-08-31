@@ -105,9 +105,9 @@ class course(models.Model):
 class extendUser(models.Model):
     """model extend the profile from login app"""
     basicUser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    college = models.OneToOneField(college, on_delete=models.CASCADE, blank=True)
-    major = models.OneToOneField(major, on_delete=models.CASCADE, blank=True)
-    courses = models.ManyToManyField(course, blank=True, help_text="courses taken by the user")
+    college = models.OneToOneField(college, on_delete=models.CASCADE, blank=True, null=True)
+    major = models.OneToOneField(major, on_delete=models.CASCADE, blank=True, null=True)
+    courses = models.ManyToManyField(course, blank=True, null=True)
     
     def __str__(self):
         return self.basicUser.user.username
