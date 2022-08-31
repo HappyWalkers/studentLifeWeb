@@ -2,7 +2,7 @@
 *.pot
 *.pyc
 __pycache__
-# db.sqlite3 # keep test data
+db.sqlite3
 .DS_Store
 
 .env
