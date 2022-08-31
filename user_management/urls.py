@@ -36,6 +36,6 @@ urlpatterns = [
     url(r'^oauth/', include('social_django.urls', namespace='social')),
 
     # course review url
-    path('course-review/', include('courseReview.urls'))
+    path('course-review/', include(('courseReview.urls', 'courseReview'), namespace='courseReview'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
