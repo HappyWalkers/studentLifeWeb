@@ -11,7 +11,7 @@
         <hr class="my-4">
         <p class="lead">
             {% if user.is_authenticated %}
-                <a class="btn btn-primary btn-lg" href="{% url 'course-review-index' %}" role="button">Course Review</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'courseReview:course-review-index' %}" role="button">Course Review</a>
             {% else %}
                 <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Sign in</a>
             {% endif %}

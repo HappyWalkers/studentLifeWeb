@@ -19,7 +19,7 @@ class college(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular college"""
-        return reverse('college-detail', args=[str(self.id)]) # the name, college-detail, defined in urls.py
+        return reverse('courseReview:college-detail', args=[str(self.id)]) # the name, college-detail, defined in urls.py
 
 
 class department(models.Model):
@@ -37,7 +37,7 @@ class department(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular department"""
-        return reverse('department-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.id})
+        return reverse('courseReview:department-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.id})
 
 class major(models.Model):
     """model representing different majors"""
@@ -55,7 +55,7 @@ class major(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular major"""
-        return reverse('major-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.id})
+        return reverse('courseReview:major-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.id})
 
 class professor(models.Model):
     """model representing different professors"""
@@ -95,7 +95,7 @@ class course(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular course"""
-        return reverse('course-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.major.id, 'courseID':self.id})
+        return reverse('courseReview:course-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.major.id, 'courseID':self.id})
 
 class extendUser(models.Model):
     """model extend the profile from login app"""

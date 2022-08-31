@@ -5,6 +5,7 @@ from . import views
 # For example, given the path shown below, for a request to /myurl/halibut/ Django will call views.my_view(request, fish=halibut, my_template_name='some_path').
 # path('myurl/<int:fish>', views.my_view, {'my_template_name': 'some_path'}, name='aurl'),
 
+app_name = "courseReview"
 
 urlpatterns = [
     path('', views.index, name='course-review-index'),

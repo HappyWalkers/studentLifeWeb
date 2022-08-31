@@ -141,7 +141,7 @@ def reviewCreate(request, collegeID, departmentID, majorID, courseID):
             comment.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('course-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID, 'majorID':majorID, 'courseID':courseID}))
+            return HttpResponseRedirect(reverse('courseReview:course-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID, 'majorID':majorID, 'courseID':courseID}))
 
     # If this is a GET (or any other method) create the default form.
     else:
@@ -187,7 +187,7 @@ def reviewUpdate(request, collegeID, departmentID, majorID, courseID, reviewID):
 
             # redirect to a new URL:
             return HttpResponseRedirect(
-                reverse('course-detail', 
+                reverse('courseReview:course-detail', 
                 kwargs={
                     'collegeID':collegeID, 
                     'departmentID':departmentID, 
@@ -218,7 +218,7 @@ class reviewDelete(DeleteView):
     model = review
 
     def get_success_url(self) -> str:
-        return reverse_lazy('course-detail', kwargs={
+        return reverse_lazy('courseReview:course-detail', kwargs={
             'collegeID':self.object.user.college.id,
             'departmentID':self.object.user.major.department.id,
             'majorID':self.object.user.major.id,
