@@ -14,6 +14,7 @@
   <p><strong>Introduction: </strong>{{ course.introduction }}</p>
 
   <h2>Reviews</h2>
+  <a href="{% url 'courseReview:review-create' collegeID=course.college.id departmentID=course.department.id majorID=course.major.id courseID=course.id %}">Post your review</a>
   {% if view.getReviews %}
     <table>
       <thead>

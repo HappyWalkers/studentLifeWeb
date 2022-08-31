@@ -2,7 +2,7 @@
 
 {% block content %}
   <h1>Review: {{ course.name }}</h1>
-  <p>User: {{ user.name }}</p>
+  <p>User: {{ user }}</p>
 
   <form action="" method="post">
     {% csrf_token %}

@@ -8,7 +8,7 @@ from . import views
 app_name = "courseReview"
 
 urlpatterns = [
-    path('', views.index, name='course-review-index'),
+    # path('', views.index, name='course-review-index'),
 
     path('college', views.collegeView.as_view(), name='colleges'),
 
@@ -25,6 +25,6 @@ urlpatterns = [
     path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review/create', views.reviewCreate, name='review-create'),
     path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review/<int:reviewID>/update', views.reviewUpdate, name='review-update'),
     path('college/<int:collegeID>/department/<int:departmentID>/major/<int:majorID>/course/<int:courseID>/review/<int:pk>/delete', views.reviewDelete.as_view(), name='review-delete'),
-
+    path('my/review', views.myReviewListView.as_view(), name='my-review'),
 
 ]

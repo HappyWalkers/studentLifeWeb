@@ -95,14 +95,19 @@ class course(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular course"""
-        return reverse('courseReview:course-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.major.id, 'courseID':self.id})
+        return reverse('courseReview:course-detail', kwargs={
+            'collegeID':self.college.id, 
+            'departmentID':self.department.id, 
+            'majorID':self.major.id, 
+            'courseID':self.id
+            })
 
 class extendUser(models.Model):
     """model extend the profile from login app"""
     basicUser = models.OneToOneField(Profile, on_delete=models.CASCADE)
-    college = models.OneToOneField(college, on_delete=models.CASCADE, blank=True)
-    major = models.OneToOneField(major, on_delete=models.CASCADE, blank=True)
-    courses = models.ManyToManyField(course, blank=True, help_text="courses taken by the user")
+    college = models.OneToOneField(college, on_delete=models.CASCADE, blank=True, null=True)
+    major = models.OneToOneField(major, on_delete=models.CASCADE, blank=True, null=True)
+    courses = models.ManyToManyField(course, blank=True, null=True)
     
     def __str__(self):
         return self.basicUser.user.username
@@ -126,7 +131,7 @@ class review(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular review"""
-        return reverse('review-detail', args=[str(self.id)])
+        return reverse('courseReview:review-detail')
 
     @classmethod
     def create(cls, user, course, content, time, rating, score, qualityRating):
