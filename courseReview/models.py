@@ -95,7 +95,12 @@ class course(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular course"""
-        return reverse('courseReview:course-detail', kwargs={'collegeID':self.college.id, 'departmentID':self.department.id, 'majorID':self.major.id, 'courseID':self.id})
+        return reverse('courseReview:course-detail', kwargs={
+            'collegeID':self.college.id, 
+            'departmentID':self.department.id, 
+            'majorID':self.major.id, 
+            'courseID':self.id
+            })
 
 class extendUser(models.Model):
     """model extend the profile from login app"""
@@ -126,7 +131,7 @@ class review(models.Model):
 
     def get_absolute_url(self):
         """returns the URL to access a particular review"""
-        return reverse('review-detail', args=[str(self.id)])
+        return reverse('courseReview:review-detail')
 
     @classmethod
     def create(cls, user, course, content, time, rating, score, qualityRating):

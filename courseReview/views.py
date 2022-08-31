@@ -224,3 +224,24 @@ class reviewDelete(DeleteView):
             'majorID':self.object.user.major.id,
             'courseID':self.object.course.id,
         })
+
+class myReviewListView(generic.ListView):
+    """myReviewListView represents my review list view"""
+    model = review
+    paginate_by = 10
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            reviewerBasicUserUser = User.objects.get(username=request.user.get_username())
+            reviewerBasicUser = Profile.objects.get(user=reviewerBasicUserUser)
+            reviewer = extendUser.objects.get(basicUser=reviewerBasicUser)
+        else:
+            reviewer = None
+        self.userID = reviewer.id
+        return super(myReviewListView, self).dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return review.objects.filter(user__id=self.userID)
+
+    def getCollege(self):
+        return college.objects.filter(id=self.collegeID)[0]

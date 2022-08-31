@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>My review List</h1>
+  {% if review_list %}
+  <ul>
+    {% for review in review_list %}
+      <li>
+        <p>
+          {{ review.course }}
+          ({{ review.content }})
+          <a href="{% url 'courseReview:review-update' collegeID=review.course.college.id departmentID=review.course.department.id majorID=review.course.major.id courseID=review.course.id reviewID=review.id %}">Edit</a>
+            
+          <a href="{% url 'courseReview:review-delete' collegeID=review.course.college.id departmentID=review.course.department.id majorID=review.course.major.id courseID=review.course.id pk=review.id %}">Delete</a>
+        </p>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no college in the database.</p>
+  {% endif %}
+{% endblock %}
