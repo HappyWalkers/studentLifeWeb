@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{view.getCollege.name}}</h1>
+  <p><strong>Introduction: </strong>{{view.getCollege.introduction}}</p>
+  <h2>Department List</h2>
+  {% if department_list %}
+  <ul>
+    {% for department in department_list %}
+      <li>
+        <a href="{{ department.get_absolute_url }}">{{ department.name }}</a> ({{department.introduction}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no department in the database.</p>
+  {% endif %}
+{% endblock %}

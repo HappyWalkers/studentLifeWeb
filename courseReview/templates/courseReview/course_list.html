@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{view.getMajor.name}}</h1>
+  <p><strong>College: </strong>{{view.getMajor.college.name}}</p>
+  <p><strong>Department: </strong>{{view.getMajor.department.name}}</p>
+  <p><strong>Introduction: </strong>{{view.getMajor.introduction}}</p>
+  <h2>Course List</h2>
+  {% if course_list %}
+  <ul>
+    {% for course in course_list %}
+      <li>
+        <a href="{{ course.get_absolute_url }}">{{ course.name }}</a> ({{course.introduction}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There is no course in the database.</p>
+  {% endif %}
+{% endblock %}

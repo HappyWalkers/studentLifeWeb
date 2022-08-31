@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Name: {{ course.name }}</h1>
+  <p><strong>Rating: </strong>{{course.rating}}</p>
+  <p><strong>College: </strong>{{course.college.name}}</p>
+  <p><strong>Department: </strong>{{course.department.name}}</p>
+  <p><strong>Major: </strong>{{course.major.name}}</p>
+  <p><strong>Professor: </strong>
+    {% for professor in view.getProfessors %}
+      {{ professor.name }},
+    {% endfor %}
+  </p>
+  <p><strong>Introduction: </strong>{{ course.introduction }}</p>
+
+  <h2>Reviews</h2>
+  {% if view.getReviews %}
+    <table>
+      <thead>
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>User</th>
+          <th>Course</th>
+          <th>Time</th>
+          <th>Rating</th>
+          <th>Quality</th>
+          <th>Score</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for review in view.getReviews %}
+          <tr>
+            <!-- <td>{{review.id}}</td> -->
+            <td>{{review.user}}</td>
+            <td>{{review.course}}</td>
+            <td>{{review.time}}</td>
+            <td>{{review.rating}}</td>
+            <td>{{review.qualityRating}}</td>
+            <td>{{review.score}}</td>
+            <td>{{review.content}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>There is no view available.</p>
+  {% endif %}
+{% endblock %}

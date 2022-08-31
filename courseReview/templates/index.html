@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Course Review Home</h1>
+  <p>Welcome to Course Review</p>
+  <h2>Dynamic content</h2>
+  <p>The course review has the following record counts:</p>
+  <ul>
+    <li><strong>Users:</strong> {{ num_users }}</li>
+    <li><strong>Colleges:</strong> {{ num_colleges }}</li>
+  </ul>
+
+  <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+{% endblock %}

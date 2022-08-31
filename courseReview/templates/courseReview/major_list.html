@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{view.getDepartment.name}}</h1>
+  <p><strong>College: </strong>{{view.getDepartment.college.name}}</p>
+  <p><strong>introduction: </strong>{{view.getDepartment.introduction}}</p>
+  <h2>Major List</h2>
+  {% if major_list %}
+  <ul>
+    {% for major in major_list %}
+      <li>
+        <a href="{{ major.get_absolute_url }}">{{ major.name }}</a> ({{major.introduction}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no major in the database.</p>
+  {% endif %}
+{% endblock %}

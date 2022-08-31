@@ -33,6 +33,10 @@ urlpatterns = [
 
     path('password-change/', ChangePasswordView.as_view(), name='password_change'),
 
+    # course review url
+    path('course-review/', include(('courseReview.urls', 'courseReview'), namespace='courseReview')),
+    
     url(r'^oauth/', include('social_django.urls', namespace='social')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UserConfig',
+    'users.apps.UserConfig', # login app
     'social_django',
-    'mod_wsgi.server',
+    # 'mod_wsgi.server', # used in server, apache used mod_wsgi to communicate with Django
+    'courseReview.apps.CoursereviewConfig', # course review app
 ]
 
 MIDDLEWARE = [
