@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>Name: {{ college.name }}</h1>
+  <a href="{% url 'courseReview:college-update' collegeID=course.college.id %}" class="btn btn-primary btn-lg">Update this college</a>
 
   <p><strong>Introduction:</strong> {{ college.introduction }}</p>
 {% endblock %}

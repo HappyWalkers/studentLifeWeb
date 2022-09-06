@@ -3,7 +3,10 @@
 {% block content %}
   <h1>{{view.getCollege.name}}</h1>
   <p><strong>Introduction: </strong>{{view.getCollege.introduction}}</p>
+  <p><strong>Web: </strong>{{view.getCollege.web}}</p>
+  <a href="{% url 'courseReview:college-update' collegeID=view.getCollege.id %}" class="btn btn-primary btn-lg">Update this college</a>
   <h2>Department List</h2>
+  <a href="{% url 'courseReview:department-create' collegeID=view.getCollege.id %}" class="btn btn-primary btn-lg">Create a new department</a>
   {% if department_list %}
   <ul>
     {% for department in department_list %}

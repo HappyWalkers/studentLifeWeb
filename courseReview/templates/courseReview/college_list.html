@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>College List</h1>
+  <a href="{% url 'courseReview:college-create' %}" class="btn btn-primary btn-lg">Create a new college</a>
   {% if college_list %}
   <ul>
     {% for college in college_list %}

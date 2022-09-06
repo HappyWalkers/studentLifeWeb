@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from courseReview.forms import reviewCourseForm
+from courseReview.forms import reviewCourseForm, collegeEditForm, departmentEditForm, majorEditForm, courseEditForm
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -52,6 +52,301 @@ class collegeDetailView(generic.ListView):
 
     def getCollege(self):
         return college.objects.filter(id=self.collegeID)[0]
+
+def collegeCreate(request):
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = collegeEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            name = form.cleaned_data['name']
+            introduction = form.cleaned_data['introduction']
+            web = form.cleaned_data['web']
+
+            newCollege = college.create(name=name, introduction=introduction, web=web)
+            newCollege.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:colleges'))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = collegeEditForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'courseReview/collegeEdit_form.html', context)
+
+def collegeUpdate(request, collegeID):
+    # get the college to be updated
+    collegeToBeUpdated = college.objects.get(id=collegeID)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = collegeEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # update the fields in review to be updated
+            collegeToBeUpdated.name = form.cleaned_data['name']
+            collegeToBeUpdated.introduction = form.cleaned_data['introduction']
+            collegeToBeUpdated.web = form.cleaned_data['web']
+
+            collegeToBeUpdated.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:colleges'))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = collegeEditForm(
+            data={
+                'name':collegeToBeUpdated.name,
+                'introduction':collegeToBeUpdated.introduction,
+                'web': collegeToBeUpdated.web,}
+                )
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'courseReview/collegeEdit_form.html', context)
+
+def departmentCreate(request, collegeID):
+    # get college the department belongs to
+    itsCollege = college.objects.get(id=collegeID)
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = departmentEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            name = form.cleaned_data['name']
+            introduction = form.cleaned_data['introduction']
+            web = form.cleaned_data['web']
+
+            newDepartment = department.create(name=name, introduction=introduction, college=itsCollege, web=web)
+            newDepartment.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:college-detail', kwargs={'collegeID':collegeID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = departmentEditForm()
+
+    context = {
+        'form': form,
+        'college': itsCollege,
+    }
+
+    return render(request, 'courseReview/departmentEdit_form.html', context)
+
+def departmentUpdate(request, collegeID, departmentID):
+    # get the department to be updated
+    departmenToBeUpdated = department.objects.get(id=departmentID)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = departmentEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # update the fields in review to be updated
+            departmenToBeUpdated.name = form.cleaned_data['name']
+            departmenToBeUpdated.introduction = form.cleaned_data['introduction']
+            # departmenToBeUpdated.college = form.cleaned_data['college']
+            departmenToBeUpdated.web = form.cleaned_data['web']
+
+            departmenToBeUpdated.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:college-detail', kwargs={'collegeID':collegeID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = departmentEditForm(
+            data={
+                'name':departmenToBeUpdated.name,
+                'introduction':departmenToBeUpdated.introduction,
+                'college':departmenToBeUpdated.college,
+                'web': departmenToBeUpdated.web,}
+                )
+
+    context = {
+        'form': form,
+        'college': departmenToBeUpdated.college,
+    }
+
+    return render(request, 'courseReview/departmentEdit_form.html', context)
+
+def majorCreate(request, collegeID, departmentID):
+    # get college the major belongs to
+    itsCollege = college.objects.get(id=collegeID)
+    # get department the major belongs to
+    itsDepartment = department.objects.get(id=departmentID)
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = majorEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            name = form.cleaned_data['name']
+            introduction = form.cleaned_data['introduction']
+
+            newMajor = major.create(name=name, introduction=introduction, college=itsCollege, department=itsDepartment)
+            newMajor.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:department-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = majorEditForm()
+
+    context = {
+        'form': form,
+        'college': itsCollege,
+        'department': itsDepartment,
+    }
+
+    return render(request, 'courseReview/majorEdit_form.html', context)
+
+def majorUpdate(request, collegeID, departmentID, majorID):
+    # get the major to be updated
+    majorToBeUpdated = major.objects.get(id=majorID)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = majorEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # update the fields in review to be updated
+            majorToBeUpdated.name = form.cleaned_data['name']
+            majorToBeUpdated.introduction = form.cleaned_data['introduction']
+
+            majorToBeUpdated.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:department-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = majorEditForm(
+            data={
+                'name':majorToBeUpdated.name,
+                'introduction':majorToBeUpdated.introduction,}
+                )
+
+    context = {
+        'form': form,
+        'college': majorToBeUpdated.college,
+        'department': majorToBeUpdated.department,
+    }
+
+    return render(request, 'courseReview/majorEdit_form.html', context)
+
+def courseCreate(request, collegeID, departmentID, majorID):
+    # get college the course belongs to
+    itsCollege = college.objects.get(id=collegeID)
+    # get department the course belongs to
+    itsDepartment = department.objects.get(id=departmentID)
+    # get major the course belongs to
+    itsMajor = major.objects.get(id=majorID)
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = courseEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            name = form.cleaned_data['name']
+            introduction = form.cleaned_data['introduction']
+            # professor = form.cleaned_data['professor']
+            rating = form.cleaned_data['rating']
+
+            newMajor = course.create(name=name, introduction=introduction, college=itsCollege, department=itsDepartment, major=itsMajor, rating=rating)
+            newMajor.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:major-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID, 'majorID':majorID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = courseEditForm()
+
+    context = {
+        'form': form,
+        'college': itsCollege,
+        'department': itsDepartment,
+        'major': major,
+    }
+
+    return render(request, 'courseReview/courseEdit_form.html', context)
+
+def courseUpdate(request, collegeID, departmentID, majorID, courseID):
+    # get the course to be updated
+    courseToBeUpdated = course.objects.get(id=courseID)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = courseEditForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # update the fields in review to be updated
+            courseToBeUpdated.name = form.cleaned_data['name']
+            courseToBeUpdated.introduction = form.cleaned_data['introduction']
+            # courseToBeUpdated.professor = form.cleaned_data['professor']
+            courseToBeUpdated.rating = form.cleaned_data['rating']
+
+            courseToBeUpdated.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('courseReview:major-detail', kwargs={'collegeID':collegeID, 'departmentID':departmentID, 'majorID':majorID}))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = courseEditForm(
+            data={
+                'name':courseToBeUpdated.name,
+                'introduction':courseToBeUpdated.introduction,
+                # 'professor':courseToBeUpdated.professor,
+                'rating':courseToBeUpdated.rating,
+                }
+                )
+
+    context = {
+        'form': form,
+        'college': courseToBeUpdated.college,
+        'department': courseToBeUpdated.department,
+        'major': courseToBeUpdated.major,
+    }
+
+    return render(request, 'courseReview/courseEdit_form.html', context)
 
 class departmentDetailView(generic.ListView):
     """departmentDetailView represents major list view"""

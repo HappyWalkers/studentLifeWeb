@@ -5,6 +5,9 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy
 
+from django.forms import ModelForm
+from .models import college, department, major, course, professor
+
 class reviewCourseForm(forms.Form):
     rating = forms.IntegerField(max_value=100, min_value=0, required=True, label="rating", initial=100, help_text="Rate this course with a value between 0 and 100")
     qualityRating = forms.IntegerField(max_value=100, min_value=0, required=True, label="quality rating", initial=100, help_text="Rate the quality of this course with a value between 0 and 100")
@@ -51,3 +54,23 @@ class reviewCourseForm(forms.Form):
             raise ValidationError(gettext_lazy('Invalid Content Length - content should be no more than 1000 characters'))
 
         return content
+
+class collegeEditForm(ModelForm):
+    class Meta:
+        model = college
+        fields = ['name', 'introduction', 'web']
+
+class departmentEditForm(ModelForm):
+    class Meta:
+        model = department
+        fields = ['name', 'introduction', 'web']
+
+class majorEditForm(ModelForm):
+    class Meta:
+        model = major
+        fields = ['name', 'introduction']
+
+class courseEditForm(ModelForm):
+    class Meta:
+        model = course
+        fields = ['name', 'introduction', 'rating']

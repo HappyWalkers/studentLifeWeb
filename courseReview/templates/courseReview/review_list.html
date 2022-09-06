@@ -9,9 +9,9 @@
         <p>
           {{ review.course }}
           ({{ review.content }})
-          <a href="{% url 'courseReview:review-update' collegeID=review.course.college.id departmentID=review.course.department.id majorID=review.course.major.id courseID=review.course.id reviewID=review.id %}">Edit</a>
+          <a href="{% url 'courseReview:review-update' collegeID=review.course.college.id departmentID=review.course.department.id majorID=review.course.major.id courseID=review.course.id reviewID=review.id %}" class="btn btn-primary btn-lg">Edit</a>
             
-          <a href="{% url 'courseReview:review-delete' collegeID=review.course.college.id departmentID=review.course.department.id majorID=review.course.major.id courseID=review.course.id pk=review.id %}">Delete</a>
+          <a href="{% url 'courseReview:review-delete' collegeID=review.course.college.id departmentID=review.course.department.id majorID=review.course.major.id courseID=review.course.id pk=review.id %}" class="btn btn-primary btn-lg">Delete</a>
         </p>
       </li>
     {% endfor %}

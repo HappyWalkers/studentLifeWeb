@@ -5,7 +5,10 @@
   <p><strong>College: </strong>{{view.getMajor.college.name}}</p>
   <p><strong>Department: </strong>{{view.getMajor.department.name}}</p>
   <p><strong>Introduction: </strong>{{view.getMajor.introduction}}</p>
+
+  <a href="{% url 'courseReview:major-update' collegeID=view.getMajor.college.id departmentID=view.getMajor.department.id majorID=view.getMajor.id %}" class="btn btn-primary btn-lg">Update this major</a>
   <h2>Course List</h2>
+  <a href="{% url 'courseReview:course-create' collegeID=view.getMajor.college.id departmentID=view.getMajor.department.id majorID=view.getMajor.id %}" class="btn btn-primary btn-lg">Create a new course</a>
   {% if course_list %}
   <ul>
     {% for course in course_list %}

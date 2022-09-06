@@ -13,8 +13,10 @@
   </p>
   <p><strong>Introduction: </strong>{{ course.introduction }}</p>
 
+  <a href="{% url 'courseReview:course-update' collegeID=course.college.id departmentID=course.department.id majorID=course.major.id courseID=course.id %}" class="btn btn-primary btn-lg">Update this course</a>
+
   <h2>Reviews</h2>
-  <a href="{% url 'courseReview:review-create' collegeID=course.college.id departmentID=course.department.id majorID=course.major.id courseID=course.id %}">Post your review</a>
+  <a href="{% url 'courseReview:review-create' collegeID=course.college.id departmentID=course.department.id majorID=course.major.id courseID=course.id %}" class="btn btn-primary btn-lg">Post your review</a>
   {% if view.getReviews %}
     <table>
       <thead>
